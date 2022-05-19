@@ -15,11 +15,9 @@ defmodule Resaltador do
     text =
       in_filename
       |> File.stream!() \
-      |> Enum.map(&String.split/1)
-      #|> IO.inspect()
-      |> Enum.map(&(Enum.join(&1, "-")))
-      #|> IO.inspect()
-      |> Enum.join("\n")
+      |> Enum.map(&change_object_key/1)\
+      |> Enum.map(&change_string/1)
+
     File.write(out_filename, text)
   end
 #Object key
@@ -28,14 +26,25 @@ defmodule Resaltador do
 #Number
 #Reserved Word
 
-  defp change_object_key(line), do: Regex.replace(~r/"(.{1,})":/, line, "<keyS>\1<keyE>"~r//)
+  defp change_object_key(line) do
 
-  defp change_punctuation(line), do: Regex.replace(~r/.{1,}/, line, )
+    regex = ~r/("(.{1,})":)/
+    Regex.replace(regex, line,
+                  "<span class = 'object_key' > \1 </span>")
+  end
 
-  defp change_string(), do: Regex.replace()
+  defp change_string(line) do
+    #Replace all of the "strings" for their equivalent in html format
+    regex = ~r/".{1,}"/
 
-  defp change_number(), do: Regex.replace()
+    Regex.replace(regex, line,
+                  "<span class = 'string'> \1 </span>")
 
-  defp change_reserved_word(), do: Regex.replace()
+  end
+
+
+  #defp change_punctuation() do Regex.replace()
+
+  #defp change_reserved_word(), do: Regex.replace()
 
 end
