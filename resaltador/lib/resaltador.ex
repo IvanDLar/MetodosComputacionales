@@ -30,7 +30,7 @@ defmodule Resaltador do
 
   defp change_object_key(line), do: Regex.replace(~r/"(.{1,})":/, line, "<keyS>\1<keyE>"~r//)
 
-  defp change_punctuation(line), do: Regex.replace()
+  defp change_punctuation(line), do: Regex.replace(~r/.{1,}/, line, )
 
   defp change_string(), do: Regex.replace()
 
