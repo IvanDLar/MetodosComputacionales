@@ -5,7 +5,7 @@ defmodule Resaltador do
 
   @doc """
   Resaltador de Sintaxis
-
+  Ivan Diaz Lara A01365801
   """
   def read_file(in_filename, out_filename) do
     # Single expression of nested calls
@@ -22,10 +22,10 @@ defmodule Resaltador do
       |> Enum.map(&change_booleans/1)
       |> Enum.map(&change_punctuation_curly_bracket/1)
       |> Enum.map(&change_punctuation_square_bracket/1)
-      |>Enum.map(&replaceNewlines/1)
-      |>Enum.map(&replaceTabs/1)
+      |>Enum.map(&change_NewLines/1)
+      |>Enum.map(&change_Indentations/1)
 
-    File.write(out_filename, text)
+    File.write(out_filename, text) #Creates new html file with the text modifications
   end
 
   defp change_object_key(line) do
@@ -43,41 +43,46 @@ defmodule Resaltador do
   end
 
   defp change_punctuation(line) do
-    regex = ~r/(;|,|:){1,}(?![^"]*")/
+    #Replace punctuation with the html equivalent
+    regex = ~r/(;|,|:){1,}(?![^"]*")/ #Regex wont match if any punct is within quotes
     Regex.replace(regex, line,
                   "<span class = 'punctuation'> \\1 </span>")
   end
 
   defp change_punctuation_curly_bracket(line) do
+    #Replace c_brackets with the html equivalent
     regex = ~r/({|})/
     Regex.replace(regex, line,
                   "<span class = 'punctuation-curly-bracket'>\\1 </span>")
   end
 
   defp change_punctuation_square_bracket(line) do
+    #Replace s_brackets with the html equivalent
     regex = ~r/(\[|\])/
     Regex.replace(regex, line,
                   "<span class = 'punctuation-square-bracket'> \\1 </span>")
   end
 
   defp change_numbers(line)do
-    regex = ~r/([0-9E+-.](?![^"]*"))/
+    #Replace numbers with the html equivalent
+    regex = ~r/([0-9E+-.](?![^"]*"))/ #Regex wont match if any num is within quotes
     Regex.replace(regex, line, "<span class = 'numbers'> \\1 </span>")
   end
 
   defp change_booleans(line) do
+    #Replace booleans with the html equivalent
     regex = ~r/(true|false|null)/
     Regex.replace(regex, line, "<span class = 'boolean'> \\1 </span>")
   end
 
-  def replaceNewlines(line) do
-    # replace new lines with html enter simbol
+  defp change_NewLines(line) do
+    #Replace new lines with html enter simbol
     regex = ~r/\n/
     Regex.replace(regex, line, "<br>")
   end
 
-  def replaceTabs(line) do
-    # replace 2 line indentations
+  defp change_Indentations(line) do
+    #Replace 2 line indentations
     regex = ~r/\s{2,4}/
     Regex.replace(regex, line, "&nbsp;&nbsp;")
   end
