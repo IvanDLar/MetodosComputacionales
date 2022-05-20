@@ -3,10 +3,6 @@ body {
   color: Gray;
 }
 
-pre {
-  font-family: Monospace;
-  font-size: 20px;
-}
 
 h1 {
   color: Black;
@@ -38,5 +34,5 @@ h1 {
 }
 
 .numbers{
-  color: rgb(17, 119, 244)
+  color: rgb(255, 212, 225)
 }

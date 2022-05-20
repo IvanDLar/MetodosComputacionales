@@ -12,6 +12,9 @@ defmodule Resaltador do
     stream = File.stream!(in_filename)
 
     # Using pipe operator to link the calls
+    head = File.read!("template_head.html")
+    footer = File.read!("template_footer.html")
+
     text =
       in_filename
       |> File.stream!()
@@ -25,7 +28,7 @@ defmodule Resaltador do
       |>Enum.map(&change_NewLines/1)
       |>Enum.map(&change_Indentations/1)
 
-    File.write(out_filename, text) #Creates new html file with the text modifications
+    File.write(out_filename, [head | text] ++ footer ) #Creates new html file with the text modifications
   end
 
   defp change_object_key(line) do
@@ -65,7 +68,7 @@ defmodule Resaltador do
 
   defp change_numbers(line)do
     #Replace numbers with the html equivalent
-    regex = ~r/([0-9E+-.](?![^"]*"))/ #Regex wont match if any num is within quotes
+    regex = ~r/(([E\-\+\d]){1,}(?![^"]*"))/ #Regex wont match if any num is within quotes
     Regex.replace(regex, line, "<span class = 'numbers'> \\1 </span>")
   end
 
@@ -83,8 +86,8 @@ defmodule Resaltador do
 
   defp change_Indentations(line) do
     #Replace 2 line indentations
-    regex = ~r/\s{2,4}/
-    Regex.replace(regex, line, "&nbsp;&nbsp;")
+    regex = ~r/\t{1,}/
+    Regex.replace(regex, line, "&nbsp;")
   end
 
 end
