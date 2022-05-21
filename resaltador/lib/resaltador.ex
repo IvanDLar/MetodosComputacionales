@@ -19,23 +19,23 @@ defmodule Resaltador do
       in_filename
       |> File.stream!()
       |> Enum.map(&change_object_key/1)
-      |> Enum.map(&change_string/1)
+      # |> Enum.map(&change_string/1)
       |> Enum.map(&change_numbers/1)
       |> Enum.map(&change_punctuation/1)
       |> Enum.map(&change_booleans/1)
       |> Enum.map(&change_punctuation_curly_bracket/1)
       |> Enum.map(&change_punctuation_square_bracket/1)
-      |>Enum.map(&change_NewLines/1)
-      |>Enum.map(&change_Indentations/1)
+      # |>Enum.map(&change_NewLines/1)
+      # |>Enum.map(&change_Indentations/1)
 
     File.write(out_filename, [head | text] ++ footer ) #Creates new html file with the text modifications
   end
 
   defp change_object_key(line) do
     #Replace all of the "object keys" for their equivalent in html format
-    regex = ~r/"(.{1,})"(?=:)/
+    regex = ~r/(["'\s])(?:(?=(\\?))\2.)*?\1(:)/
     Regex.replace(regex, line,
-                  "<span class = 'object_key'> \\1 </span>")
+                  "<span class = 'object_key'> \\0 </span>")
   end
 
   defp change_string(line) do
@@ -47,9 +47,9 @@ defmodule Resaltador do
 
   defp change_punctuation(line) do
     #Replace punctuation with the html equivalent
-    regex = ~r/(;|,|:){1,}(?![^"]*")/ #Regex wont match if any punct is within quotes
+    regex = ~r/(:|,|;)(?=([^"]*"[^"]*")*[^"]*$)(?!")/ #Regex wont match if any punct if it is within quotes
     Regex.replace(regex, line,
-                  "<span class = 'punctuation'> \\1 </span>")
+                  "<span class = 'punctuation'> \\0 </span>")
   end
 
   defp change_punctuation_curly_bracket(line) do
@@ -68,8 +68,8 @@ defmodule Resaltador do
 
   defp change_numbers(line)do
     #Replace numbers with the html equivalent
-    regex = ~r/(([E\-\+\d]){1,}(?![^"]*"))/ #Regex wont match if any num is within quotes
-    Regex.replace(regex, line, "<span class = 'numbers'> \\1 </span>")
+    regex = ~r/(\d)+(?=([^"]*"[^"]*")*[^"]*$)(?!")/ #Regex wont match if any num is within quotes
+    Regex.replace(regex, line, "<span class = 'numbers'> \\0 </span>")
   end
 
   defp change_booleans(line) do
@@ -78,16 +78,16 @@ defmodule Resaltador do
     Regex.replace(regex, line, "<span class = 'boolean'> \\1 </span>")
   end
 
-  defp change_NewLines(line) do
-    #Replace new lines with html enter simbol
-    regex = ~r/\n/
-    Regex.replace(regex, line, "<br>")
-  end
+  # defp change_NewLines(line) do
+  #   #Replace new lines with html enter simbol
+  #   regex = ~r/\n/
+  #   Regex.replace(regex, line, "<br>")
+  # end
 
-  defp change_Indentations(line) do
-    #Replace 2 line indentations
-    regex = ~r/\t{1,}/
-    Regex.replace(regex, line, "&nbsp;")
-  end
+  # defp change_Indentations(line) do
+  #   #Replace 2 line indentations
+  #   regex = ~r/\t{1,}/
+  #   Regex.replace(regex, line, "&nbsp;")
+  # end
 
 end
