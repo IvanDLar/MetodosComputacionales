@@ -33,7 +33,7 @@ defmodule Resaltador do
 
   defp change_object_key(line) do
     #Replace all of the "object keys" for their equivalent in html format
-    regex = ~r/"(.{1,})"\s*(?=:)/
+    regex = ~r/"(.{1,})"(?=:)/
     Regex.replace(regex, line,
                   "<span class = 'object_key'> \\1 </span>")
   end
