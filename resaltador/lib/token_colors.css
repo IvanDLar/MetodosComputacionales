@@ -24,15 +24,10 @@ h1 {
   font-weight: bold;
 }
 
-.reserved-word {
-  font-weight: bold;
-  color: SandyBrown;
-}
-
 .punctuation-curly-bracket, .punctuation, .punctuation-square-bracket {
   color: rgb(132, 136, 252);
 }
 
 .numbers{
-  color: rgb(255, 212, 225)
+  color: rgb(66, 64, 181)
 }

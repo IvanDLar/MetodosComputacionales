@@ -25,15 +25,15 @@ defmodule Resaltador do
       |> Enum.map(&change_booleans/1)
       |> Enum.map(&change_punctuation_curly_bracket/1)
       |> Enum.map(&change_punctuation_square_bracket/1)
-      |>Enum.map(&change_NewLines/1)
-      |>Enum.map(&change_Indentations/1)
+      # |>Enum.map(&change_NewLines/1)
+      # |>Enum.map(&change_Indentations/1)
 
     File.write(out_filename, [head | text] ++ footer ) #Creates new html file with the text modifications
   end
 
   defp change_object_key(line) do
     #Replace all of the "object keys" for their equivalent in html format
-    regex = ~r/"(.{1,})"(?=:)/
+    regex = ~r/\"([^\"]*)\"(?=\s*:)/
     Regex.replace(regex, line,
                   "<span class = 'object_key'> \\1 </span>")
   end
@@ -47,7 +47,7 @@ defmodule Resaltador do
 
   defp change_punctuation(line) do
     #Replace punctuation with the html equivalent
-    regex = ~r/(;|,|:){1,}(?![^"]*")/ #Regex wont match if any punct is within quotes
+    regex = ~r/(:|,|;)(?=([^"]*"[^"]*")*[^"]*$)(?!")/ #Regex wont match if any punct is within quotes
     Regex.replace(regex, line,
                   "<span class = 'punctuation'> \\1 </span>")
   end
@@ -68,7 +68,7 @@ defmodule Resaltador do
 
   defp change_numbers(line)do
     #Replace numbers with the html equivalent
-    regex = ~r/(([E\-\+\d]){1,}(?![^"]*"))/ #Regex wont match if any num is within quotes
+    regex = ~r/(([E\-\+\d\.]+)(?=([^"]*"[^"]*")*[^"]*$)(?!"))/ #Regex wont match if any num is within quotes
     Regex.replace(regex, line, "<span class = 'numbers'> \\1 </span>")
   end
 
