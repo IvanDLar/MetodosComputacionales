@@ -2,7 +2,6 @@ defmodule Resaltador do
   @moduledoc """
   Documentation for `Resaltador`.
   """
-
   @doc """
   Resaltador de Sintaxis
   Ivan Diaz Lara A01365801

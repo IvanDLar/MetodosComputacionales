@@ -1,6 +1,6 @@
 # Actividad Integradora 3.4
 Implementación de métodos computacionales (Gpo 600) 
-## Table of contents
+## Tabla de contenidos
 
 - [Integrantes del Equipo](#integrantes-del-equipo)
 - [Estructura Léxica](#estructura-lexica)
@@ -12,7 +12,7 @@ Implementación de métodos computacionales (Gpo 600)
 ## Integrantes del equipo
 
  - **Iván Díaz Lara** A01365801 
- - **OCtavio Fenollosa** A0
+ - **OCtavio Fenollosa** A01781042
 
 
 ## Estructura Léxica
