@@ -1,0 +1,33 @@
+body {
+  background-color: Black;
+  color: Gray;
+}
+
+
+h1 {
+  color: Black;
+  border: 4px solid red;
+  background-color: Aquamarine;
+  text-align: center;
+}
+.boolean{
+  color: firebrick;
+}
+
+.string {
+  color: rgb(255, 0, 230);
+  font-style: italic;
+}
+
+.object_key {
+  color: LightSkyBlue;
+  font-weight: bold;
+}
+
+.punctuation-curly-bracket, .punctuation, .punctuation-square-bracket {
+  color: rgb(132, 136, 252);
+}
+
+.numbers{
+  color: rgb(181, 181, 64)
+}
