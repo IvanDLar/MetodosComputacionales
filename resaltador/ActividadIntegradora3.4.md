@@ -103,7 +103,7 @@ Enum.map() toma en orden los valores de la lista que le fue transferida y aplica
                     "<span class = 'object_key'> \\1 </span>")
     end
 
-La expresión regex detectará **mapachi revisión** un conjunto que se encuentre entre parentesis que tenga delante de el dos puntos ( : ), el "match" de dicho regex no incluirá en la seleccion los parentesis.
+La expresión regex detectará un conjunto que se encuentre entre parentesis que tenga delante de el dos puntos ( : ), el "match" de dicho regex no incluirá en la seleccion los parentesis.
 
 La función "Regex.replace()" tiene una aridad de 3, donde tomará como primer atributo a regex, como segundo la linea a analizar (la cual recibe a través de Enum.map()) y cómo tercero el texto por el cual reemplazara los conjuntos detectados por el regex.
 
