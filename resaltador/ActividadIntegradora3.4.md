@@ -116,7 +116,7 @@ Tiene una complejidad linear (O(n)) ya que analiza cada elemento de la lista que
 La funcion tiene que pasar por cada elemento que coincide con la expresión regular y reemplazarla por el valor indicado en el tercer atributo, por lo tanto podemos llegar a la conclusión de que tiene una complejidad linear (O(n)).
 
 ## Conclusión
-Debido a que la función que nos regresa el resultado final es basicamente "Enum.map(Regex.replace())", entonces podemos decir que la complejidad sería de O(n * m) donde:
+Debido a que la función que nos regresa el resultado final es basicamente "Enum.map(Regex.replace())", podemos decir que la complejidad sería de O(n * m) donde:
 - n: Numero de elementos de una lista 
 - m: Conjuntos coincidentes dentro de cada elemento de la lista 
 Sin embargo, la lista siempre tendrá un solo elemtento y la función se ejecuta multiples veces, por lo tanto tendremos que multiplicar el resultado pasado por N (numero de veces que se repite).
