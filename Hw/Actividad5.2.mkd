@@ -5,7 +5,6 @@ Implementación de métodos computacionales (Gpo 600)
  - **Iván Díaz Lara** A01365801 
  - **OCtavio Fenollosa** A01781042
 
-
 ## Secuencial vs Paralelismo
 
 En la imagen inferior podemos apreciar la diferencia de tiempos de ejecución entre las 2 diferentes versiones del programa.

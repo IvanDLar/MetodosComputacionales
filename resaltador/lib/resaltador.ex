@@ -7,14 +7,11 @@ defmodule Resaltador do
   Ivan Diaz Lara A01365801
   Octavio Fenollosa A01781042
   """
-  #Timer.tc(fn -> <Resaltador.read_file("","")> end)
-  #Timer.tc(fn -> Resaltador.read_file(file) end) |> elem(0) |> Kernel./(1000000)
   def read_multi_file()do
     File.ls("./SimpleTests")
     |> elem(1)
     |> Enum.map(&Task.start(fn -> read_file(&1) end))
   end
-
 
   def read_file(in_filename) do
 
@@ -102,6 +99,13 @@ defmodule Resaltador do
     #Replace tab indentations with their html counterpart
     regex = ~r/\t{1,}/
     Regex.replace(regex, line, "&nbsp;")
+  end
+
+  def timer(func) do
+    func
+    |> :timer.tc()
+    |> elem(0)
+    |> Kernel./(1_000_000)
   end
 
 end
