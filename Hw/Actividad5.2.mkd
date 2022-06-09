@@ -1,0 +1,17 @@
+# Actividad 5.2 Programación paralela y concurrente
+Implementación de métodos computacionales (Gpo 600) 
+## Integrantes del equipo
+
+ - **Iván Díaz Lara** A01365801 
+ - **OCtavio Fenollosa** A01781042
+
+
+## Secuencial vs Paralelismo
+
+En la imagen inferior podemos apreciar la diferencia de tiempos de ejecución entre las 2 diferentes versiones del programa.
+
+La primera, qué es la secuencial tomó alrededor de 30 segundos para poder completar su ejecución. 
+
+La segunda fué la ejecución del programa en paralelo, donde gracias a la capacidad de dividir y usar el poder de procesamiento de multiples "threads" en distintos segmentos, pudimos realizar excitosamente la ejecucción casi 3 veces más rapido que la secuencial.
+#
+![](SecuencialVSParallelism.png)

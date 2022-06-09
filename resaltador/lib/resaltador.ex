@@ -5,15 +5,25 @@ defmodule Resaltador do
   @doc """
   Resaltador de Sintaxis
   Ivan Diaz Lara A01365801
+  Octavio Fenollosa A01781042
   """
-  def read_file(in_filename, out_filename) do
+  #Timer.tc(fn -> <Resaltador.read_file("","")> end)
+  #Timer.tc(fn -> Resaltador.read_file(file) end) |> elem(0) |> Kernel./(1000000)
+  def read_multi_file()do
+    File.ls("./SimpleTests")
+    |> elem(1)
+    |> Enum.map(&Task.start(fn -> read_file(&1) end))
+  end
+
+
+  def read_file(in_filename) do
 
     # Using pipe operator to link the calls
     head = File.read!("template_head.html")
     footer = File.read!("template_footer.html")
 
     text =
-      in_filename
+      "./SimpleTests/#{in_filename}"
       |> File.stream!()
       |> Enum.map(&change_object_key/1)
       |> Enum.map(&change_string/1)
@@ -25,8 +35,9 @@ defmodule Resaltador do
       |> Enum.map(&change_NewLines/1)
       |> Enum.map(&change_Indentations/1)
 
-    File.write(out_filename, [head | text] ++ footer ) #Creates new html file with the text modifications
-  end
+    File.write(Regex.replace(~r/(.json)$/, in_filename, ".html"), [head | text] ++ footer) #Creates new html file with the text modifications
+
+    end
 
   defp change_object_key(line) do
     #Replace all of the "object keys" for their equivalent in html format
