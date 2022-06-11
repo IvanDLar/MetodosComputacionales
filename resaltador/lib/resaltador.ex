@@ -1,18 +1,36 @@
+# Actividad 5.3 Resaltador de Sintaxis
+
+# Ivan Diaz Lara A01365801
+# Octavio Fenollosa A01781042
+# 2022-06-10
+#
+
 defmodule Resaltador do
   @moduledoc """
-  Documentation for `Resaltador`.
+  Extract multiple files from a specified folder, read their syntax, translate
+  it to HTML and write it down in a new ".html" file.
   """
   @doc """
-  Resaltador de Sintaxis
-  Ivan Diaz Lara A01365801
-  Octavio Fenollosa A01781042
+  Extract the files from the specified folder.
   """
-  def read_multi_file()do
+  def read_multi_file() do
+    File.ls("./SimpleTests")
+    |> elem(1)
+    |> Enum.map(&read_file/1)
+  end
+
+  @doc """
+  Extract the files from the specified folder using parallelism.
+  """
+    def read_multi_file_parallel()do
     File.ls("./SimpleTests")
     |> elem(1)
     |> Enum.map(&Task.start(fn -> read_file(&1) end))
   end
 
+  @doc """
+  Read the specified file line by line and replace the matches found with regex.replace.
+  """
   def read_file(in_filename) do
 
     # Using pipe operator to link the calls
@@ -101,7 +119,13 @@ defmodule Resaltador do
     Regex.replace(regex, line, "&nbsp;")
   end
 
-  def timer(func) do
+  @doc """
+  Obtain the time the specified function took to finish executing
+
+  Call from the iex:
+  Primes.time(fn -> Primes.(<function>) end)
+  """
+    def timer(func) do
     func
     |> :timer.tc()
     |> elem(0)
