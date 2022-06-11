@@ -24,11 +24,11 @@ Por lo tanto decidimos cambiar esta solución por una más eficiente, el paralel
 Para comprobar la funcionalidad correcta de la nueva solución, hicimos algunas pruebas varíando el tamaño de los archivos jsons y también la cantidad de archivos dentro de la carpeta indicada.
 
 ### Large JSON files | 6 samples:
-![](TestPictures\ParallelvsSecuencial_6Big_FileSearch.png)
+![](ParallelvsSecuencial_6Big_FileSearch.png)
 ### Small JSON files | 6 samples:
-![](TestPictures\ParallelvsSecuencial_6Small_FileSearch.png)
+![](ParallelvsSecuencial_6Small_FileSearch.png)
 ### Large and Small JSON files | 6 small and 3 large samples:
-![](TestPictures\MixedFiles.png)
+![](MixedFiles.png)
 
 Los resultados nos muestran una mejora impresionante, en promedio el parallelismo fue un 99.9% más rapido a la hora de leer los archivos.
 
