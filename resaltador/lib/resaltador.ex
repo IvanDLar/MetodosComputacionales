@@ -57,17 +57,17 @@ defmodule Resaltador do
   defp change_object_key(line) do
     #Replace all of the "object keys" for their equivalent in html format
     #Regex will only mach if there is a : character after the string
-    regex = ~r/\"([^\"]*)\"(?=\s*:)/
+    regex = ~r/\"([^\"]*)\"(?=\s*(?::))/
     Regex.replace(regex, line,
-                  "<span class = 'object_key'> \\1 </span>")
+                  "<span class = 'object_key'> \\0 </span>")
   end
 
   defp change_string(line) do
     #Replace all of the "strings" for their equivalent in html format
     #Regex will only mach if there isn't a : character after the string
-    regex = ~r/("(.{1,})"(?!:))/
+    regex = ~r/((?<=:)\s*(".{1,}"))/
     Regex.replace(regex, line,
-                  "<span class = 'string'> \\1 </span>")
+                  "<span class = 'string'> \\2 </span>")
   end
 
   defp change_punctuation(line) do
