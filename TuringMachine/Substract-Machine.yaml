@@ -1,0 +1,37 @@
+name: Subtract-Machine
+source code: |-
+  input: '1111-11'
+  blank: ' '
+  start state: goto_last
+  table:
+    goto_last:
+      1: {write: 1, R: goto_last}
+      " ": R
+      -: {R: delete_found}
+      
+    delete_found:
+      1: {write: 1, R: delete_found}
+      -: {R: delete_found}
+      ' ': {write: ' ', L: remove_last}
+      
+    goto_first:
+      1: {L: goto_first}
+      -: {L: goto_first}
+      ' ': {write: ' ', R: remove_first}    
+      
+    remove_last:
+      1: {write: " ", L: goto_first}
+      -: {write: " ", L: finish}
+      ' ': {write: ' ', R: goto_first}
+    finish:
+
+    remove_first:
+      1: {write: " ", R: goto_last}
+      
+positions:
+  goto_last: {x: 387.59, y: 324.22}
+  delete_found: {x: 309.58, y: 133.56}
+  goto_first: {x: 687.19, y: 118.28}
+  remove_last: {x: 514.49, y: 60.42}
+  finish: {x: 516.46, y: 200.69}
+  remove_first: {x: 680.97, y: 319.37}
